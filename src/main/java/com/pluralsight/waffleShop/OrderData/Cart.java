@@ -12,7 +12,7 @@ public class Cart {
         myCart = new ArrayList<>();
     }
 
-    public List<Product> getProduct() {
+    public List<Product> getMyCart() {
         return myCart;
     }
 
