@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Waffle extends Product {
+    public static final String reset = "\u001B[0m";
+    public static final String green = "\u001B[32m";
+
     private String waffleType;
     private String size;
     private ArrayList<Topping> listOfTopping;
@@ -49,7 +52,7 @@ public class Waffle extends Product {
 
     public void removeToppings(Scanner scanner) {
         if(listOfTopping.isEmpty()){
-            System.out.println("No Toppings to remove");
+            System.out.println("No Toppings To Remove!");
             return;
         }
         while (true){
@@ -81,7 +84,7 @@ public class Waffle extends Product {
 
             if (remove != null){
                 listOfTopping.remove(remove);
-                System.out.println("Removed" + remove);
+                System.out.println(green + "Removed" + remove + reset);
             }else {
                 System.out.println(remove + " is not included!");
             }
@@ -146,7 +149,7 @@ public class Waffle extends Product {
         boolean wantsExtra = extraChoice.equalsIgnoreCase("yes");
 
         addToppings(new Meat(meatName , waffle.getSize() ,wantsExtra));
-        System.out.println("Added " + meatName + " Successfully!");
+        System.out.println(green + "Added " + meatName + " Successfully!" + reset);
 
     }
 
@@ -183,7 +186,7 @@ public class Waffle extends Product {
         boolean wantsExtra = extraChoice.equalsIgnoreCase("yes");
 
         addToppings(new Chocolate(chocName , waffle.getSize() ,wantsExtra));
-        System.out.println("Added " + chocName + " Successfully!");
+        System.out.println(green + "Added " + chocName + " Successfully!" + reset);
     }
 
     public void addFruit(Scanner scanner, Waffle waffle) {
@@ -227,7 +230,7 @@ public class Waffle extends Product {
         boolean wantsExtra = extraChoice.equalsIgnoreCase("yes");
 
         addToppings(new Fruit(fruitName ,wantsExtra));
-        System.out.println("Added " + fruitName + " Successfully!");
+        System.out.println(green + "Added " + fruitName + " Successfully!" + reset);
     }
 
     public void addSyrup(Scanner scanner, Waffle waffle) {
@@ -263,7 +266,7 @@ public class Waffle extends Product {
         boolean wantsExtra = extraChoice.equalsIgnoreCase("yes");
 
         addToppings(new Syrup(syrupName,wantsExtra));
-        System.out.println("Added " + syrupName + " Successfully!");
+        System.out.println(green + "Added " + syrupName + " Successfully!" + reset);
     }
 
     public void addSide(Scanner scanner, Waffle waffle) {
@@ -293,7 +296,7 @@ public class Waffle extends Product {
         boolean wantsExtra = extraChoice.equalsIgnoreCase("yes");
 
         addToppings(new Side(sideName,wantsExtra));
-        System.out.println("Added " + sideName + " Successfully!");
+        System.out.println(green + "Added " + sideName + " Successfully!" + reset);
     }
 
 

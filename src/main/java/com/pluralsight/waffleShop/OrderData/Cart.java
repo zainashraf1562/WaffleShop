@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
+    public static final String blue = "\u001B[34m";
+    public static final String reset = "\u001B[0m";
     private List<Product> myCart;
 
     public Cart(){
@@ -26,18 +28,18 @@ public class Cart {
 
     public void showMyCart() {
         if (getMyCart().isEmpty()) {
-            System.out.println("[ Empty Cart ]");
+            System.out.println(blue + "[ Empty Cart ]" + reset);
             return;
         }
 
-        System.out.println("=== MY CART ===\n");
+        System.out.println(blue+ "=== MY CART ===\n");
 
         for (Product product : myCart) {
             System.out.println(product);
             System.out.println("-----------------------");
         }
 
-        System.out.println("\nTotal: $" + String.format("%.2f", getTotalCost()));
+        System.out.println("\nTotal: $" + String.format("%.2f", getTotalCost()) + reset);
     }
 
 

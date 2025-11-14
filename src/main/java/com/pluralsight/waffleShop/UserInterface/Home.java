@@ -31,8 +31,7 @@ public class Home {
                             "║                                             ║\n" +
                             "║   👉 1. Start a New Order                   ║\n" +
                             "║   👉 0. Exit                                ║\n" +
-                            "║                                             ║\n" +
-                            "╚═════════════════════════════════════════════╝\n"
+                            "╚═════════════════════════════════════════════╝"
             );
 
 
@@ -62,10 +61,10 @@ public class Home {
                             "║   🧇 1. Waffles                                             ║\n" +
                             "║   🍨 2. Ice Cream                                           ║\n" +
                             "║   🥤 3. Milkshake                                           ║\n" +
-                            "║   💵 4. Checkout                                            ║\n" +
                             "║   🛒 5. Current Shopping Cart                               ║\n" +
+                            "║   💵 4. Checkout                                            ║\n" +
                             "║   ❌ 0. Cancel Order                                        ║\n" +
-                            "╚═════════════════════════════════════════════════════════════╝\n"
+                            "╚═════════════════════════════════════════════════════════════╝"
             );
 
 
@@ -83,11 +82,12 @@ public class Home {
                     addMilkShake();
                     break;
                 case 4:
-                    checkout();
-                    myCart.emptyMyCart();
+                    myCart.showMyCart();
                     break;
                 case 5:
-                    myCart.showMyCart();
+                    checkout();
+                    myCart.emptyMyCart();
+                    quit = true;
                     break;
                 case 0:
                     quit = true;
@@ -120,7 +120,7 @@ public class Home {
         Waffle newWaffle = null;
         if (input == 1) {
             System.out.println(
-                            "╔══════════════════ WAFFLE SIZE ══════════════════╗\n" +
+                            "╔══════════════════ WAFFLE SIZE ═════════════════╗\n" +
                             "║   1. Small                                     ║\n" +
                             "║   2. Medium                                    ║\n" +
                             "║   3. Large                                     ║\n" +
@@ -265,6 +265,7 @@ public class Home {
                     continue;
                 }
             }
+            System.out.println(green + "Added IceCream Successfully!" + reset);
             return;
         }
 
@@ -324,7 +325,7 @@ public class Home {
 
         MilkShake drink = new MilkShake(drinkName, shakeSize);
         myCart.addProduct(drink);
-        System.out.println(green + "Successfully added drink!"+ reset);
+        System.out.println(green + "Added Drink Successfully!"+ reset);
     }
 
     private void checkout() {
