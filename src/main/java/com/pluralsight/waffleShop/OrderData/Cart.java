@@ -24,6 +24,20 @@ public class Cart {
         myCart.clear();
     }
 
+    public void showMyCart(){
+        if(getMyCart().isEmpty()){
+            System.out.println("Empty Cart!");
+            return;
+        }
+        System.out.println("My Cart: ");
+        System.out.println();
+        for (Product product : myCart) {
+            System.out.println(product);
+        }
+        System.out.println("\nYour total is: $" + getTotalCost());
+
+    }
+
     public double getTotalCost(){
         double sum = 0;
 
