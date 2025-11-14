@@ -84,7 +84,7 @@ public class Waffle extends Product {
 
             if (remove != null){
                 listOfTopping.remove(remove);
-                System.out.println(green + "Removed" + remove + reset);
+                System.out.println(green + "Removed " + remove + reset);
             }else {
                 System.out.println(remove + " is not included!");
             }
