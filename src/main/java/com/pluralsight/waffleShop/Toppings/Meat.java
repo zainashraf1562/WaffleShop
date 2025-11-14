@@ -1,31 +1,29 @@
 package com.pluralsight.waffleShop.Toppings;
 
-public class Chocolate extends Topping {
-
-    public Chocolate(String name, String size, boolean extra) {
+public class Meat extends Topping{
+    public Meat(String name, String size, boolean extra) {
         super(name, size, extra);
     }
 
+    @Override
     public double getPrice(){
-        double totalPrice = 0;
+        double totalPrice = 0.0;
         if (getSize().equalsIgnoreCase("small")){
-            totalPrice = 0.75;
+            totalPrice = 1;
             if (isExtra()){
-                totalPrice += 0.30;
+                totalPrice += 0.5;
             }
         } else if (getSize().equalsIgnoreCase("medium")) {
-            totalPrice = 1.50;
+            totalPrice = 2;
             if (isExtra()){
-                totalPrice += 0.60;
+                totalPrice += 1;
             }
         } else if (getSize().equalsIgnoreCase("large")) {
-            totalPrice = 2.25;
+            totalPrice = 3;
             if (isExtra()){
-                totalPrice += 0.90;
+                totalPrice += 1.5;
             }
         }
         return totalPrice;
     }
-
-
 }
