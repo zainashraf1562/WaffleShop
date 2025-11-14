@@ -176,7 +176,8 @@ public class Waffle extends Product {
             case 8 -> fruitName = "Banana";
             case 9 -> fruitName = "Pineapple";
             default -> {
-                System.out.println("Try Again!");;
+                System.out.println("Try Again!");
+                return;
             }
         }
         System.out.print("Do you want extra fruit? (Enter 'yes' or leave blank) ");
@@ -211,7 +212,8 @@ public class Waffle extends Product {
             case 4 -> syrupName = "Blueberry Syrup";
             case 5 -> syrupName = "Strawberry Syrup";
             default -> {
-                System.out.println("Try Again!");;
+                System.out.println("Try Again!");
+                return;
             }
         }
         System.out.print("Do you want extra syrup? (Enter 'yes' or leave blank) ");
@@ -240,7 +242,8 @@ public class Waffle extends Product {
             case 1 -> sideName = "Fries";
             case 2 -> sideName = "Scrambled Eggs";
             default -> {
-                System.out.println("Try Again!");;
+                System.out.println("Try Again!");
+                return;
             }
         }
         System.out.print("Do you want extra sides? (Enter 'yes' or leave blank) ");
@@ -250,5 +253,51 @@ public class Waffle extends Product {
         addToppings(new Fruit(sideName,wantsExtra));
         System.out.println("Added " + sideName + "Successfully!");
     }
+
+    public void setWaffleType(Scanner scanner, Waffle waffle) {
+        System.out.println("Waffle Types: ");
+        System.out.println("1. Belgian");
+        System.out.println("2. Chocolate Chip");
+        System.out.println("3. Cinnamon");
+        System.out.println("4. Buttermilk");
+        System.out.println("0. Exit");
+
+        int sideChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (sideChoice == 0){
+            return;
+        }
+
+        String sideName = "";
+        switch (sideChoice) {
+            case 1 -> sideName = "Belgian";
+            case 2 -> sideName = "Chocolate Chip";
+            case 3 -> sideName = "Cinnamon";
+            case 4 -> sideName = "Classic Buttermilk";
+            default -> {
+                System.out.println("Try Again!");
+                return;
+            }
+        }
+        waffleType = sideName;
+    }
+
+    public String toString() {
+        String base = "Waffle: " + size + " " + waffleType + " Waffle - $" + getPrice();
+
+        if (listOfTopping.isEmpty()) {
+            return base + "\n[ No Toppings ]";
+        }
+
+        String line = "";
+        for (int i = 0; i < listOfTopping.size(); i++) {
+            Topping topping = listOfTopping.get(i);
+            line += "- " + topping.toString() + "\n";
+        }
+
+        return base + "\nToppings:\n" + line.trim();
+    }
+
 
 }
