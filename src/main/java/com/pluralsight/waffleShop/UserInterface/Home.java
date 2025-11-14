@@ -14,16 +14,27 @@ public class Home {
     private Scanner scanner = new Scanner(System.in);
     private Cart myCart;
 
+    public static final String reset = "\u001B[0m";
+    public static final String green = "\u001B[32m";
+    public static final String red = "\u001B[31m";
+
+
+
     public void homeScreen(){
 
         while (true){
             System.out.println(
-                    "🧇🧇🧇  WELCOME TO WAFFLE SHOP!  🧇🧇🧇\n" +
-                            "---------------------------------------\n" +
-                            "   1 ➤ Start New Order\n" +
-                            "   0 ➤ Exit\n" +
-                            "---------------------------------------\n"
+                            "╔═════════════════════════════════════════════╗\n" +
+                            "║              🍨 WAFFLE SHOP 🧇              ║\n" +
+                            "╠═════════════════════════════════════════════╣\n" +
+                            "║   Welcome to the Waffle & Ice Cream Heaven! ║\n" +
+                            "║                                             ║\n" +
+                            "║   👉 1. Start a New Order                   ║\n" +
+                            "║   👉 0. Exit                                ║\n" +
+                            "║                                             ║\n" +
+                            "╚═════════════════════════════════════════════╝\n"
             );
+
 
             int userInput = scanner.nextInt();
             scanner.nextLine();
@@ -33,10 +44,10 @@ public class Home {
                     orderMenu();
                     break;
                 case 0:
-                    System.out.println("GoodBye!!");
+                    System.out.println(green + "GoodBye!!" + reset);
                     return;
                 default:
-                    System.out.println("Wrong Input, Try Again");
+                    System.out.println(red + "Invalid Input, Try Again" + reset);
             }
         }
     }
@@ -47,18 +58,16 @@ public class Home {
 
         while(!quit){
             System.out.println(
-                            "🍦🍨🍧 WELCOME TO THE WAFFLE HOUSE MENU 🍧🍨🍦\n" +
-                            "----------------------------------------------------\n" +
-                            "   1 ➤ Waffles 🧇\n" +
-                            "   2 ➤ IceCream 🍨\n" +
-                            "   3 ➤ MilkShake 🥤\n" +
-                            "   4 ➤ CheckOut 🛒\n" +
-                            "   0 ➤ Cancel Order ❌\n" +
-                            "----------------------------------------------------\n"
+                            "╔═══════════════════════ WAFFLE SHOP MENU ════════════════════╗\n" +
+                            "║   🧇 1. Waffles                                             ║\n" +
+                            "║   🍨 2. Ice Cream                                           ║\n" +
+                            "║   🥤 3. Milkshake                                           ║\n" +
+                            "║   💵 4. Checkout                                            ║\n" +
+                            "║   🛒 5. Current Shopping Cart                               ║\n" +
+                            "║   ❌ 0. Cancel Order                                        ║\n" +
+                            "╚═════════════════════════════════════════════════════════════╝\n"
             );
 
-
-            System.out.print("Your Choice: ");
 
             int userInput2 = scanner.nextInt();
             scanner.nextLine();
@@ -68,46 +77,98 @@ public class Home {
                     addWaffle();
                     break;
                 case 2:
-                    addMilkShake();
+                    addIceCream();
                     break;
                 case 3:
-                    addIceCream();
+                    addMilkShake();
                     break;
                 case 4:
                     checkout();
                     myCart.emptyMyCart();
                     break;
+                case 5:
+                    myCart.showMyCart();
+                    break;
                 case 0:
                     quit = true;
-                    System.out.println("Order Canceled");
+                    System.out.println(green + "Order Canceled" + reset);
                     break;
                 default:
-                    System.out.println("Enter Valid Input");
+                    System.out.println(red + "Enter a Valid Input" + reset);
             }
         }
     }
 
     private void addWaffle() {
-        System.out.println("Enter Waffle Type");
-        System.out.println("1. Make Your Own Waffle");
-        System.out.println("2. Signature Waffle");
+        System.out.println(
+                        "╔═══════════════════ WAFFLE TYPE ═══════════════════╗\n" +
+                        "║   1. Make Your Own Waffle                         ║\n" +
+                        "║   2. Signature Waffle                             ║\n" +
+                        "║   0. Cancel                                       ║\n" +
+                        "╚═══════════════════════════════════════════════════╝"
+        );
+
         int input = scanner.nextInt();
         scanner.nextLine();
-        String waffleType = "";
+        String userInputType = "";
         switch (input){
-            case 1 -> waffleType = "Make Your Own Waffle";
-            case 2 -> waffleType = "Signature Waffle";
-            default -> System.out.println("Invalid, Try again!");
+            case 1 -> userInputType = "Make Your Own Waffle";
+            case 2 -> userInputType = "Signature Waffle";
+            default -> System.out.println(red + "Invalid Input, Try again!" + reset);
         }
 
         Waffle newWaffle = null;
         if (input == 1) {
-            waffleType = "Custom Waffle";
-            System.out.print("Enter Size (small,medium,large): ");
-            String waffleSize = scanner.nextLine();
+            System.out.println(
+                            "╔══════════════════ WAFFLE SIZE ══════════════════╗\n" +
+                            "║   1. Small                                     ║\n" +
+                            "║   2. Medium                                    ║\n" +
+                            "║   3. Large                                     ║\n" +
+                            "╚════════════════════════════════════════════════╝"
+            );
 
-            System.out.print("Enter Waffle Type (Belgian,Chocolate,Cinnamon,Buttermilk): ");
-            String pizzaType = scanner.nextLine();
+            int size = scanner.nextInt();
+            scanner.nextLine();
+
+            String waffleSize = "";
+            switch (size) {
+                case 1 -> waffleSize = "small";
+                case 2 -> waffleSize = "medium";
+                case 3 -> waffleSize = "large";
+                default -> {
+                    System.out.println(red + "Invalid Input, Try again!" + reset);
+                    return;
+                }
+            }
+
+            System.out.println(
+                            "╔══════════════════════ WAFFLE TYPE ════════════════════╗\n" +
+                            "║   1. Belgian                                          ║\n" +
+                            "║   2. Chocolate                                        ║\n" +
+                            "║   3. Cinnamon                                         ║\n" +
+                            "║   4. Buttermilk                                       ║\n" +
+                            "║   0. Back                                             ║\n" +
+                            "╚═══════════════════════════════════════════════════════╝"
+            );
+
+            int input09 = scanner.nextInt();
+            scanner.nextLine();
+
+            String waffleType = "";
+            switch (input09) {
+                case 1 -> waffleType = "Belgian";
+                case 2 -> waffleType = "Chocolate";
+                case 3 -> waffleType = "Cinnamon";
+                case 4 -> waffleType = "Buttermilk";
+                case 0 -> {
+                    System.out.println(green + "Menu..." + reset);
+                    return;
+                }
+                default -> {
+                    System.out.println(red + "Invalid Input, Try again!" + reset);
+                    return;
+                }
+            }
 
             System.out.print("Do you want it crispy? Enter yes or leave blank: ");
             String stuffedHolder = scanner.nextLine();
@@ -116,14 +177,17 @@ public class Home {
             newWaffle = new Waffle("Custom Waffle", waffleType, waffleSize, isCrispy);
 
             addTopping(newWaffle);
-            myCart.addProduct(newWaffle);
-            System.out.println("Added Custom Waffle Successfully!");
+            System.out.println(green + "Added Custom Waffle Successfully!" + reset);
 
         } else if (input == 2) {
-            System.out.println("Choose a Signature Waffle:");
-            System.out.println("1. Classic Waffle");
-            System.out.println("2. Special Waffle");
-            System.out.println("0. Cancel");
+            System.out.println(
+                            "╔══════════════ SIGNATURE WAFFLES ══════════════╗\n" +
+                            "║   1. Classic Waffle                           ║\n" +
+                            "║   2. Special Waffle                           ║\n" +
+                            "║   0. Cancel                                   ║\n" +
+                            "╚═══════════════════════════════════════════════╝"
+            );
+
 
             int input2 = scanner.nextInt();
             scanner.nextLine();
@@ -133,35 +197,35 @@ public class Home {
                 case 2 -> newWaffle = new SpecialWaffle();
                 case 0 -> { return; }
                 default -> {
-                    System.out.println("Invalid, Try-Again");
+                    System.out.println(red + "Invalid Input, Try Again" + reset);
                     return;
                 }
             }
 
             addTopping(newWaffle);
-            System.out.println("Signature Pizza Added");
+            System.out.println(green + "Added Signature Waffle Successfully"  + reset);
         }
-
         myCart.addProduct(newWaffle);
-        System.out.println("Added Pizza Successfully");
+
     }
 
     private void addTopping(Waffle newWaffle) {
         while(true) {
-            System.out.println("TOPPINGS");
-            System.out.println("Enter: ");
-            System.out.println("1. Meats");
-            System.out.println("2. Chocolates");
-            System.out.println("3. Fruits");
-            System.out.println("4. Syrups");
-            System.out.println("4. Sides");
-            System.out.println("5. Remove Topping");
-            System.out.println("0. Done..");
+            System.out.println(
+                            "╔════════════════════ TOPPINGS MENU ═══════════════════╗\n" +
+                            "║   1. Meats                                           ║\n" +
+                            "║   2. Chocolates                                      ║\n" +
+                            "║   3. Fruits                                          ║\n" +
+                            "║   4. Syrups                                          ║\n" +
+                            "║   5. Sides                                           ║\n" +
+                            "║   6. Remove Topping                                  ║\n" +
+                            "║   0. Cancel                                          ║\n" +
+                            "╚══════════════════════════════════════════════════════╝"
+            );
+
             int userInput3 = scanner.nextInt();
             scanner.nextLine();
-            if (userInput3 == 0) {
-                return;
-            }
+
             switch (userInput3) {
                 case 1 -> newWaffle.addMeat(scanner,newWaffle);
                 case 2 -> newWaffle.addChocolate(scanner,newWaffle);
@@ -169,19 +233,25 @@ public class Home {
                 case 4 -> newWaffle.addSyrup(scanner,newWaffle);
                 case 5 -> newWaffle.addSide(scanner,newWaffle);
                 case 6 -> newWaffle.removeToppings(scanner);
-                default -> System.out.println("Invalid Input, Try Again!");
+                case 0 -> {
+                    return;
+                }
+                default -> System.out.println(red + "Invalid Input, Try Again!" + reset);
             }
         }
     }
 
     private void addIceCream() {
         while (true) {
-            System.out.println("ICECREAM");
-            System.out.println("Enter: ");
-            System.out.println("1. Vanilla");
-            System.out.println("2. Chocolate");
-            System.out.println("3. Cookie Dough");
-            System.out.println("0. Exit");
+            System.out.println(
+                            "╔════════════════════ ICE CREAM MENU ════════════════════╗\n" +
+                            "║   1. Vanilla                                           ║\n" +
+                            "║   2. Chocolate                                         ║\n" +
+                            "║   3. Cookie Dough                                      ║\n" +
+                            "║   0. Back                                              ║\n" +
+                            "╚════════════════════════════════════════════════════════╝"
+            );
+
             int input4 = scanner.nextInt();
             scanner.nextLine();
 
@@ -189,9 +259,9 @@ public class Home {
                 case 1 -> myCart.addProduct(new Icecream("Vanilla"));
                 case 2 -> myCart.addProduct(new Icecream("Chocolate"));
                 case 3 -> myCart.addProduct(new Icecream("Cookie Dough"));
-                case 0 -> System.out.println("Menu...");
+                case 0 -> System.out.println(green + "Menu..." + reset);
                 default -> {
-                    System.err.println("Invalid, Try Again!");
+                    System.err.println(red + "Invalid Input, Try Again!" + reset);
                     continue;
                 }
             }
@@ -201,11 +271,15 @@ public class Home {
     }
 
     private void addMilkShake() {
-        System.out.println("DRINK");
-        System.out.println("Enter: ");
-        System.out.println("1. Vanilla");
-        System.out.println("2. Chocolate");
-        System.out.println("1. Chocolate Chip");
+        System.out.println(
+                        "╔════════════════════ MILKSHAKE MENU ═══════════════════╗\n" +
+                        "║   1. Vanilla                                           ║\n" +
+                        "║   2. Chocolate                                         ║\n" +
+                        "║   3. Chocolate Chip                                    ║\n" +
+                        "║   0. Back                                              ║\n" +
+                        "╚════════════════════════════════════════════════════════╝"
+        );
+
 
         int input5 = scanner.nextInt();
         scanner.nextLine();
@@ -213,21 +287,27 @@ public class Home {
 
         String drinkName = "";
         switch (input5) {
-            case 1 -> drinkName = "Coke";
-            case 2 -> drinkName = "Pepsi";
-            case 3 -> drinkName = "Water";
+            case 1 -> drinkName = "Vanilla";
+            case 2 -> drinkName = "Chocolate";
+            case 3 -> drinkName = "Chocolate Chip";
             case 0 -> {
-                System.out.println("Menu...");
+                System.out.println(green + "Menu..." + reset);
                 return;
             }
             default -> {
-                System.out.println("Invalid, Try again!");
+                System.out.println(red+ "Invalid Input, Try again!" + reset);
                 return;
             }
         }
 
-        System.out.println("Enter size:");
-        System.out.println("1. Small | 2. Medium | 3. Large");
+        System.out.println(
+                        "╔══════════════════ DRINK SIZE ══════════════════╗\n" +
+                        "║   1. Small                                     ║\n" +
+                        "║   2. Medium                                    ║\n" +
+                        "║   3. Large                                     ║\n" +
+                        "╚════════════════════════════════════════════════╝"
+        );
+
         int size = scanner.nextInt();
         scanner.nextLine();
 
@@ -237,37 +317,37 @@ public class Home {
             case 2 -> shakeSize = "medium";
             case 3 -> shakeSize = "large";
             default -> {
-                System.out.println("Invalid , Try again!");
+                System.out.println(red + "Invalid Input, Try again!" + reset);
                 return;
             }
         }
 
         Drink drink = new Drink(drinkName, shakeSize);
         myCart.addProduct(drink);
-        System.out.println("Successfully added drink!");
+        System.out.println(green + "Successfully added drink!"+ reset);
     }
 
     private void checkout() {
-        System.out.println("Check Out");
+        System.out.println(
+                "╔══════════════════════ CHECKOUT ══════════════════════╗"
+        );
 
         if (myCart.getMyCart().isEmpty()){
-            System.out.println("You have no items in this order");
+            System.out.println(red + "You have no items in this order"+ reset);
             return;
         }
 
         myCart.showMyCart();
 
-        double total = myCart.getTotalCost();
-        System.out.println("Total Cost: " + total);
         System.out.println("Confirm Order? (Yes/No)");
         String input6 = scanner.nextLine();
 
         if (input6.equalsIgnoreCase("yes")){
             ReceiptDataManager receiptDataManager = new ReceiptDataManager();
             receiptDataManager.saveReceipt(myCart);
-            System.out.println("Order successfully placed");
+            System.out.println(green + "Order successfully placed"+ reset);
         } else {
-            System.out.println("Order Canceled!");
+            System.out.println(red+ "Order Canceled!"+ reset);
         }
     }
 
